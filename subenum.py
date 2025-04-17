@@ -1,7 +1,16 @@
 import argparse
 import os
 from modules import passive,bruteforce
-
+def display_results(results):
+    """ Function for display results after complete enumeration """
+    unique_sorted=sorted(set(results)) # remove duplicates and sorted
+    if unique_sorted:
+        print("\n[*] Found Subdomains: ")
+        for sub in unique_sorted:
+            print(f" - {sub}")
+    else:
+        print("\n[!] No subdomains Found")
+        
 def main():
     # argument parser setup
     parser=argparse.ArgumentParser(description="Subdomain Enumeration Tool")
@@ -42,7 +51,7 @@ def main():
             f.write(sub+"\n")
     print(f"[+] Found {len(results)} subdomains. Results Saved to {output_path}")
 
-
+    display_results(results)
 
 if __name__ == "__main__":
     main()
